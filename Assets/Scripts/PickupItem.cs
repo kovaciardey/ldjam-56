@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PickupItem : MonoBehaviour
 {
@@ -10,28 +12,60 @@ public class PickupItem : MonoBehaviour
     public Transform holdPosition; // Position where the object will be held (optional)
     
     [Header("Throwing")]
-    public float throwForce = 10f; // The force with which to throw the sphere
+    public float maxThrowForce = 20f; // The maximum force for the throw
+    public float chargeSpeed = 10f; // Speed at which the force charges
+
+    public Slider chargeBar;
     
+    private float _currentThrowForce = 0f; // The current charged force
     private bool _isHolding; // To check if the sphere is being held
+    private bool _isCharging = false; // To check if the player is charging the throw
 
     private GameObject _pickedItem;
     private GameObject _highlightedItem;
     
     private Rigidbody _itemRb;
-    
+
+    private void Start()
+    {
+        // Set the charge bar's initial value
+        if (chargeBar != null)
+        {
+            chargeBar.minValue = 0;
+            chargeBar.maxValue = maxThrowForce;
+            chargeBar.value = 0;
+        }
+    }
+
     void Update()
     {
         HandleInput();
         HandleRaycast();
+        HandleChargeBar();
     }
     
     void HandleInput()
     {
+        // THROWING
         if (Input.GetMouseButtonDown(0) && _isHolding)
+        {
+            StartCharging();
+        }
+        
+        // Continue charging while the button is held down
+        if (Input.GetMouseButton(0) && _isCharging)
+        {
+            ChargeThrow();
+        }
+        
+        // Release the throw when the mouse button is released
+        if (Input.GetMouseButtonUp(0) && _isCharging)
         {
             ThrowObject();
         }
         
+        
+        // PICKUP
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (_pickedItem == null)
@@ -60,6 +94,29 @@ public class PickupItem : MonoBehaviour
             ResetHighlight();
         }
     }
+
+    void HandleChargeBar()
+    {
+        // Update the charging bar
+        if (chargeBar != null)
+        {
+            chargeBar.value = _currentThrowForce; // Update the bar to reflect the current charge
+        }
+    }
+    
+    void StartCharging()
+    {
+        // Start charging the throw
+        _isCharging = true;
+        _currentThrowForce = 0f; // Reset throw force
+    }
+    
+    void ChargeThrow()
+    {
+        // Increase the throw force over time, up to a maximum
+        _currentThrowForce += chargeSpeed * Time.deltaTime;
+        _currentThrowForce = Mathf.Clamp(_currentThrowForce, 0f, maxThrowForce); // Clamp the force to the max value
+    }
     
     // Perform raycasting and return the object hit
     GameObject RaycastForPickup(out RaycastHit hit)
@@ -78,12 +135,24 @@ public class PickupItem : MonoBehaviour
     {
         // Detach the sphere from the hand (if necessary)
         _isHolding = false;
+        _isCharging = false;
 
         // Enable physics on the sphere
         _itemRb.isKinematic = false;
+        
+        Debug.Log(_currentThrowForce);
 
         // Apply force to the sphere in the forward direction
-        _itemRb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
+        _itemRb.AddForce(transform.forward * _currentThrowForce, ForceMode.Impulse);
+        
+        // Reset the current throw force for the next throw
+        _currentThrowForce = 0f;
+        
+        // Reset the charge bar
+        if (chargeBar != null)
+        {
+            chargeBar.value = 0;
+        }
         
         ResetHolding();
     }
