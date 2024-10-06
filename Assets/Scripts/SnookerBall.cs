@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class SnookerBallColourAssigner : MonoBehaviour
+public class SnookerBall : MonoBehaviour
 {
     // Enum to represent different snooker ball types
     public enum SnookerBallType { Red, Yellow, Green, Brown, Blue, Pink, Black, White }
