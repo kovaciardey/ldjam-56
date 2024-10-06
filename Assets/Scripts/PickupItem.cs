@@ -34,6 +34,7 @@ public class PickupItem : MonoBehaviour
             chargeBar.minValue = 0;
             chargeBar.maxValue = maxThrowForce;
             chargeBar.value = 0;
+            chargeBar.gameObject.SetActive(false); // Hide the charge bar initially
         }
     }
 
@@ -109,6 +110,12 @@ public class PickupItem : MonoBehaviour
         // Start charging the throw
         _isCharging = true;
         _currentThrowForce = 0f; // Reset throw force
+        
+        // Show the charge bar
+        if (chargeBar != null)
+        {
+            chargeBar.gameObject.SetActive(true);
+        }
     }
     
     void ChargeThrow()
@@ -152,6 +159,7 @@ public class PickupItem : MonoBehaviour
         if (chargeBar != null)
         {
             chargeBar.value = 0;
+            chargeBar.gameObject.SetActive(false);
         }
         
         ResetHolding();
