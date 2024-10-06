@@ -15,29 +15,63 @@ public class PickupItem : MonoBehaviour
     private bool _isHolding; // To check if the sphere is being held
 
     private GameObject _pickedItem;
-
+    private GameObject _highlightedItem;
+    
     private Rigidbody _itemRb;
     
     void Update()
     {
-        // Check if the left mouse button is clicked and the sphere is being held
+        HandleInput();
+        HandleRaycast();
+    }
+    
+    void HandleInput()
+    {
         if (Input.GetMouseButtonDown(0) && _isHolding)
         {
             ThrowObject();
         }
         
-        // Check if the player presses the pickup key ("E" by default)
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (_pickedItem == null) // If not holding anything, try to pick up an item
+            if (_pickedItem == null)
             {
                 TryPickupItem();
             }
-            else // If holding an item, drop it
+            else
             {
                 DropItem();
             }
         }
+    }
+    
+    // Handle raycasting and highlighting logic
+    void HandleRaycast()
+    {
+        RaycastHit hit;
+        GameObject hitItem = RaycastForPickup(out hit);
+
+        if (hitItem != null && hitItem != _pickedItem)
+        {
+            HighlightObject(hitItem);
+        }
+        else
+        {
+            ResetHighlight();
+        }
+    }
+    
+    // Perform raycasting and return the object hit
+    GameObject RaycastForPickup(out RaycastHit hit)
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+        if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer) && hit.collider.CompareTag("Pickup"))
+        {
+            return hit.collider.gameObject;
+        }
+
+        return null;
     }
 
     void ThrowObject()
@@ -56,36 +90,38 @@ public class PickupItem : MonoBehaviour
     
     void TryPickupItem()
     {
-        // Create a ray from the camera's center
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
+        GameObject hitItem = RaycastForPickup(out hit);
 
-        // Perform the raycast
-        if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
+        if (hitItem != null)
         {
-            // Check if the hit object has a tag or component that marks it as pickup-able
-            if (hit.collider.CompareTag("Pickup"))
-            {
-                _isHolding = true;
-                
-                _pickedItem = hit.collider.gameObject;
-
-                // Disable physics to make the object follow the player
-                _itemRb = _pickedItem.GetComponent<Rigidbody>();
-                if (_itemRb != null)
-                {
-                    _itemRb.isKinematic = true;
-                }
-
-                // Move the object to the hold position and make it a child of the player (optional)
-                _pickedItem.transform.position = holdPosition.position;
-                _pickedItem.transform.SetParent(holdPosition);
-            }
+            _pickedItem = hitItem;
+            PickupObject(_pickedItem);
+            ResetHighlight();
         }
+    }
+    
+    // Pickup logic: Disable physics and move the object to the hold position
+    void PickupObject(GameObject item)
+    {
+        _isHolding = true;
+
+        // Disable physics to make the object follow the player
+        _itemRb = _pickedItem.GetComponent<Rigidbody>();
+        if (_itemRb != null)
+        {
+            _itemRb.isKinematic = true;
+        }
+
+        // Move the object to the hold position and make it a child of the player (optional)
+        _pickedItem.transform.position = holdPosition.position;
+        _pickedItem.transform.SetParent(holdPosition);
     }
     
     void DropItem()
     {
+        _isHolding = false;
+        
         // Enable physics on the item
         _itemRb = _pickedItem.GetComponent<Rigidbody>();
         if (_itemRb != null)
@@ -96,16 +132,36 @@ public class PickupItem : MonoBehaviour
         ResetHolding();
     }
     
+    void HighlightObject(GameObject item)
+    {
+        if (_highlightedItem != item && !_isHolding)
+        {
+            ResetHighlight(); // Reset previously highlighted item
+            _highlightedItem = item;
+
+            RandomColour colourScript = _highlightedItem.GetComponent<RandomColour>();
+            colourScript.Highlight();
+        }
+    }
+    
     /**
      * Resets the state of holding an item
      */
     private void ResetHolding()
     {
         // Remove the item from the player's hold position and reset its parent
-        // if (_pickedItem != null)
-        // {
-            _pickedItem.transform.SetParent(null);
-        // }
+        _pickedItem.transform.SetParent(null);
         _pickedItem = null;
+    }
+    
+    void ResetHighlight()
+    {
+        if (_highlightedItem != null)
+        {
+            RandomColour colourScript = _highlightedItem.GetComponent<RandomColour>();
+            colourScript.ResetColour();
+
+            _highlightedItem = null;
+        }
     }
 }
