@@ -317,9 +317,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   holdPosition: {fileID: 5221421482749791273}
-  maxThrowForce: 10
-  chargeSpeed: 5
+  maxThrowForce: 5
+  chargeSpeed: 2
   chargeBar: {fileID: 6333861862728975191}
+  playerCamera: {fileID: 4459864851310106426}
 --- !u!1 &4459864850190357393
 GameObject:
   m_ObjectHideFlags: 0

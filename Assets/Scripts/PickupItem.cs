@@ -16,6 +16,7 @@ public class PickupItem : MonoBehaviour
     public float chargeSpeed = 10f; // Speed at which the force charges
 
     public Slider chargeBar;
+    public Camera playerCamera;
     
     private float _currentThrowForce = 0f; // The current charged force
     private bool _isHolding; // To check if the sphere is being held
@@ -148,9 +149,12 @@ public class PickupItem : MonoBehaviour
         _itemRb.isKinematic = false;
         
         Debug.Log(_currentThrowForce);
+        
+        // Apply the charged force to the sphere in the direction the player is looking (camera forward direction)
+        Vector3 throwDirection = playerCamera.transform.forward; // Get the camera's forward direction
 
         // Apply force to the sphere in the forward direction
-        _itemRb.AddForce(transform.forward * _currentThrowForce, ForceMode.Impulse);
+        _itemRb.AddForce(throwDirection * _currentThrowForce, ForceMode.Impulse);
         
         // Reset the current throw force for the next throw
         _currentThrowForce = 0f;
