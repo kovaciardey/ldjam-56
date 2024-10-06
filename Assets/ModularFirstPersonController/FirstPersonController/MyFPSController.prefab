@@ -317,8 +317,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   holdPosition: {fileID: 5221421482749791273}
-  maxThrowForce: 20
-  chargeSpeed: 10
+  maxThrowForce: 10
+  chargeSpeed: 5
   chargeBar: {fileID: 6333861862728975191}
 --- !u!1 &4459864850190357393
 GameObject:

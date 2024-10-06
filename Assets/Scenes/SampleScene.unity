@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (11)
@@ -255,10 +259,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 797319227673766937, guid: 50337b8d6a22fe74299ea751dbb81e7f, type: 3}
-      propertyPath: sphere
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384738, guid: 50337b8d6a22fe74299ea751dbb81e7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11
@@ -303,17 +303,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: MyFPSController
       objectReference: {fileID: 0}
-    - target: {fileID: 4459864850019384750, guid: 50337b8d6a22fe74299ea751dbb81e7f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4571231276078618695, guid: 50337b8d6a22fe74299ea751dbb81e7f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5272025110955786636, guid: 50337b8d6a22fe74299ea751dbb81e7f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605051633559149898, guid: 50337b8d6a22fe74299ea751dbb81e7f, type: 3}
+      propertyPath: chargeSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605051633559149898, guid: 50337b8d6a22fe74299ea751dbb81e7f, type: 3}
+      propertyPath: maxThrowForce
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -390,6 +390,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (9)
@@ -724,10 +728,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2105586692}
     m_Modifications:
-    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
-      propertyPath: ballType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Yellow_SnookerBall
@@ -790,6 +790,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (12)
@@ -946,6 +950,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (8)
@@ -1147,7 +1155,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 50, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &543537212
 MeshRenderer:
@@ -1207,6 +1215,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall
@@ -1357,6 +1369,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (5)
@@ -1710,7 +1726,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934665907}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c22c4c382bd2997498d889f164845e16, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1898,6 +1914,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (14)
@@ -1960,6 +1980,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (4)
@@ -2248,7 +2272,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 50, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1436861787
 MeshRenderer:
@@ -2308,6 +2332,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (7)
@@ -2370,6 +2398,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (13)
@@ -2432,6 +2464,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (3)
@@ -2494,6 +2530,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (6)
@@ -2556,6 +2596,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (1)
@@ -2727,7 +2771,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 50, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1768114748
 MeshRenderer:
@@ -2787,6 +2831,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (10)
@@ -2849,6 +2897,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199611188}
     m_Modifications:
+    - target: {fileID: 3647115967469385077, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
+      propertyPath: ballType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4194399997197908337, guid: 8954ff973fa21bf49813283e7d039b5f, type: 3}
       propertyPath: m_Name
       value: Red_SnookerBall (2)
@@ -3065,7 +3117,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 50, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1950610128
 MeshRenderer:
