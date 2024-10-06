@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5221421482749791273}
   m_Layer: 0
-  m_Name: MyStuff
+  m_Name: A_HoldingPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,7 @@ Transform:
   m_LocalPosition: {x: 0.543, y: -0.111, z: 1.283}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4915293774339896098}
+  m_Children: []
   m_Father: {fileID: 4459864851310106429}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4459864850019384750
@@ -46,7 +45,7 @@ GameObject:
   - component: {fileID: 4459864850019384737}
   - component: {fileID: 4459864850019384741}
   - component: {fileID: 4459864850019384740}
-  - component: {fileID: 797319227673766937}
+  - component: {fileID: 8605051633559149898}
   m_Layer: 0
   m_Name: MyFPSController
   m_TagString: Player
@@ -201,7 +200,7 @@ MonoBehaviour:
   walkSpeed: 5
   maxVelocityChange: 10
   enableSprint: 1
-  unlimitedSprint: 1
+  unlimitedSprint: 0
   sprintKey: 304
   sprintSpeed: 7
   sprintDuration: 5
@@ -226,7 +225,7 @@ MonoBehaviour:
   joint: {fileID: 4459864851508666808}
   bobSpeed: 10
   bobAmount: {x: 0, y: 0.1, z: 0}
---- !u!114 &797319227673766937
+--- !u!114 &8605051633559149898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,11 +234,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4459864850019384750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57e403011ce0544aa734f6a5f0d6db7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f1505d79aa24824cb652b4ca97cbd96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphere: {fileID: 1987263645837074738}
-  throwForce: 20
+  pickupRange: 3
+  pickupLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  holdPosition: {fileID: 5221421482749791273}
+  throwForce: 10
 --- !u!1 &4459864850190357393
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,70 +729,3 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!1001 &6329632470791427746
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 5221421482749791273}
-    m_Modifications:
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5495362360495814544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-      propertyPath: m_Name
-      value: Sphere
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
---- !u!1 &1987263645837074738 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5495362360495814544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-  m_PrefabInstance: {fileID: 6329632470791427746}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4915293774339896098 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1432706083096028544, guid: 056b6821d18d5ad4a8916c6462472d9c, type: 3}
-  m_PrefabInstance: {fileID: 6329632470791427746}
-  m_PrefabAsset: {fileID: 0}
