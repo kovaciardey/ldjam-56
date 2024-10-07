@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PickupItem : MonoBehaviour
@@ -10,6 +11,7 @@ public class PickupItem : MonoBehaviour
     public float pickupRange = 3f; // The maximum distance to pick up an item
     public LayerMask pickupLayer;  // LayerMask to detect only pickup-able items
     public Transform holdPosition; // Position where the object will be held (optional)
+    public Text actionText; // UI text to show when highlighting the item
     
     [Header("Throwing")]
     public float maxThrowForce = 20f; // The maximum force for the throw
@@ -144,6 +146,13 @@ public class PickupItem : MonoBehaviour
         // Detach the sphere from the hand (if necessary)
         _isHolding = false;
         _isCharging = false;
+        
+        // Enable the collider and rigidbody before throwing
+        Collider itemCollider = _pickedItem.GetComponent<Collider>();
+        if (itemCollider != null)
+        {
+            itemCollider.enabled = true;
+        }
 
         // Enable physics on the sphere
         _itemRb.isKinematic = false;
@@ -186,6 +195,13 @@ public class PickupItem : MonoBehaviour
     void PickupObject(GameObject item)
     {
         _isHolding = true;
+        
+        // Disable collider and make the object follow the player
+        Collider itemCollider = _pickedItem.GetComponent<Collider>();
+        if (itemCollider != null)
+        {
+            itemCollider.enabled = false;
+        }
 
         // Disable physics to make the object follow the player
         _itemRb = _pickedItem.GetComponent<Rigidbody>();
@@ -222,6 +238,13 @@ public class PickupItem : MonoBehaviour
 
             RandomColour colourScript = _highlightedItem.GetComponent<RandomColour>();
             colourScript.Highlight();
+            
+            // Show the highlight text
+            if (actionText != null)
+            {
+                // highlightText.text = "Item Highlighted: " + _highlightedItem.name;
+                actionText.gameObject.SetActive(true);
+            }
         }
     }
     
@@ -243,6 +266,12 @@ public class PickupItem : MonoBehaviour
             colourScript.ResetColour();
 
             _highlightedItem = null;
+            
+            // Hide the highlight text
+            if (actionText != null)
+            {
+                actionText.gameObject.SetActive(false);
+            }
         }
     }
 }
