@@ -17,6 +17,7 @@ public class PickupItem : MonoBehaviour
     public float maxThrowForce = 20f; // The maximum force for the throw
     public float chargeSpeed = 10f; // Speed at which the force charges
 
+    public GameObject chargeBarContainer;
     public Slider chargeBar;
     public Camera playerCamera;
     
@@ -37,7 +38,7 @@ public class PickupItem : MonoBehaviour
             chargeBar.minValue = 0;
             chargeBar.maxValue = maxThrowForce;
             chargeBar.value = 0;
-            chargeBar.gameObject.SetActive(false); // Hide the charge bar initially
+            chargeBarContainer.gameObject.SetActive(false); // Hide the charge bar initially
         }
     }
 
@@ -115,9 +116,9 @@ public class PickupItem : MonoBehaviour
         _currentThrowForce = 0f; // Reset throw force
         
         // Show the charge bar
-        if (chargeBar != null)
+        if (chargeBarContainer != null)
         {
-            chargeBar.gameObject.SetActive(true);
+            chargeBarContainer.gameObject.SetActive(true);
         }
     }
     
@@ -169,10 +170,10 @@ public class PickupItem : MonoBehaviour
         _currentThrowForce = 0f;
         
         // Reset the charge bar
-        if (chargeBar != null)
+        if (chargeBarContainer != null)
         {
             chargeBar.value = 0;
-            chargeBar.gameObject.SetActive(false);
+            chargeBarContainer.gameObject.SetActive(false);
         }
         
         ResetHolding();
