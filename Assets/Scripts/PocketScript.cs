@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class PocketScript : MonoBehaviour
 {
-    // Reference to the particle effect prefab
-    public GameObject particleEffect;
+    public ParticleSystem sparkles;
 
+    private void Start()
+    {
+        // Instantiate the particle effect at the start but keep it inactive initially
+        if (sparkles != null)
+        {
+            sparkles.Stop(); // Ensure the particle system is not playing on start
+        }
+    }
+    
     // This function is called when another object enters the trigger collider
     private void OnTriggerEnter(Collider other)
     {
@@ -14,11 +22,9 @@ public class PocketScript : MonoBehaviour
         if (other.CompareTag("SnookerBall"))  // Replace "Gem" with the appropriate tag of the object you want to destroy
         {
             // Instantiate the particle effect at the object's position
-            if (particleEffect != null)
+            if (sparkles != null)
             {
-                // TODO: figure out a better way to deal with the sparkles
-                Instantiate(particleEffect, other.transform.position, Quaternion.identity);
-                // Instantiate(particleEffect, transform.position, new Quaternion());
+                sparkles.Play(); // Play the sparkle effect
             }
 
             // Destroy the other GameObject (the gem/ball entering the pocket)
