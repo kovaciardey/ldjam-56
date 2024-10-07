@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -14,6 +15,14 @@ public class GameController : MonoBehaviour
     public float totalTime = 60f; // Total time for the countdown
     public Text timerText; // Reference to the UI text element to display the timer
     
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+
+    public Text welcomeText;
+    public Text startText;
+
+    public GameObject startGameButton;
+    
     private float _timeRemaining; // Time remaining for the countdown
     private bool _timerRunning; // Flag to check if the timer is running
     
@@ -22,7 +31,6 @@ public class GameController : MonoBehaviour
     public void UpdateScore(int valueToAdd)
     {
         score += valueToAdd;
-        Debug.Log("Score");
     }
     
     void Start()
@@ -32,19 +40,19 @@ public class GameController : MonoBehaviour
 
         // _dialogs = new List<GameObject>();
         
-        StartGame();
+        // StartGame();
 
-        _timerRunning = true;
+        // _timerRunning = true;
     }
     
     void Update()
     {
         scoreText.text = "Score: " + score;
         
-        // if (Input.GetKeyDown(KeyCode.Escape))
-        // {
-        //     PauseGame();
-        // }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
         
         if (_timerRunning)
         {
@@ -68,7 +76,6 @@ public class GameController : MonoBehaviour
             if (_timeRemaining <= 0)
             {
                 GameWon();
-
             }
         }
     }
@@ -79,8 +86,8 @@ public class GameController : MonoBehaviour
         
         _timeRemaining = totalTime; // Initialize the time remaining
 
-        // welcomeText.text = "Get Ready!";
-        // startText.text = "BEGIN!";
+        welcomeText.text = "Get Ready!";
+        startText.text = "BEGIN!";
     }
 
     private void GameWon()
@@ -91,34 +98,36 @@ public class GameController : MonoBehaviour
                 
         StopGameExecution();
                 
-        // welcomeText.text = "YOU WON!";
-        // startGameButton.SetActive(false);
+        welcomeText.text = "YOU WON!";
+        startGameButton.SetActive(false);
     }
 
     public void StartGame()
     {
+        Debug.Log("Start Game");
+        
         Unpause();
         
         _timerRunning = true; // Start the timer
         
-        // pauseMenu.SetActive(false);
+        pauseMenu.SetActive(false);
     }
 
-    // private void GameOver()
-    // {
-    //     StopGameExecution();
-    //     
-    //     welcomeText.text = "Game Over!";
-    //     startGameButton.SetActive(false);
-    // }
+    private void GameOver()
+    {
+        StopGameExecution();
+        
+        welcomeText.text = "Game Over!";
+        startGameButton.SetActive(false);
+    }
     
-    // private void PauseGame()
-    // {
-    //     StopGameExecution();
-    //     
-    //     welcomeText.text = "Paused";
-    //     startText.text = "Continue";
-    // }
+    private void PauseGame()
+    {
+        StopGameExecution();
+        
+        welcomeText.text = "Paused";
+        startText.text = "Continue";
+    }
 
     private void StopGameExecution()
     {
@@ -126,7 +135,7 @@ public class GameController : MonoBehaviour
         
         Time.timeScale = 0f;
         
-        // pauseMenu.SetActive(true);
+        pauseMenu.SetActive(true);
     }
     
     private void Unpause()
@@ -141,11 +150,11 @@ public class GameController : MonoBehaviour
         return _isPaused;
     }
 
-    // public void ResetGame()
-    // {
-    //     Scene scene = SceneManager.GetActiveScene();
-    //     SceneManager.LoadScene(scene.name);
-    //     
-    //     StartGame();
-    // }
+    public void ResetGame()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+        
+        StartGame();
+    }
 }

@@ -987,6 +987,10 @@ MonoBehaviour:
   scoreText: {fileID: 8256545417981179719}
   totalTime: 60
   timerText: {fileID: 4304556919056271466}
+  pauseMenu: {fileID: 0}
+  welcomeText: {fileID: 0}
+  startText: {fileID: 0}
+  startGameButton: {fileID: 0}
 --- !u!1 &4459864850190357393
 GameObject:
   m_ObjectHideFlags: 0
