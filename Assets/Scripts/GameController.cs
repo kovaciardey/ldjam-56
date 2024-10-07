@@ -1,18 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int score = 0;
+
+    public Text scoreText;
+
+    private void Update()
     {
-        
+        scoreText.text = "Score: " + score;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateScore(int valueToAdd)
     {
-        
+        score += valueToAdd;
+        Debug.Log("Score");
     }
 }

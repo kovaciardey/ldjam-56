@@ -6,6 +6,8 @@ public class PocketScript : MonoBehaviour
 {
     public ParticleSystem sparkles;
 
+    public GameController gameController;
+
     private void Start()
     {
         // Instantiate the particle effect at the start but keep it inactive initially
@@ -21,6 +23,9 @@ public class PocketScript : MonoBehaviour
         // Check if the object that entered the trigger is the one you want to destroy (e.g., gem or ball)
         if (other.CompareTag("SnookerBall"))  // Replace "Gem" with the appropriate tag of the object you want to destroy
         {
+            int snookerBallScore = other.GetComponent<SnookerBall>().ballScore;
+            gameController.UpdateScore(snookerBallScore);
+            
             // Instantiate the particle effect at the object's position
             if (sparkles != null)
             {
