@@ -87,7 +87,7 @@ public class SnookerBall : MonoBehaviour
         ballScore = GetBallScore(ballType);
 
         // Optionally print the score for debug purposes
-        Debug.Log("Selected Ball: " + ballType + ", Score: " + ballScore);
+        // Debug.Log("Selected Ball: " + ballType + ", Score: " + ballScore);
         
         // Start the coroutine to check motion periodically
         StartCoroutine(CheckMotionRoutine());

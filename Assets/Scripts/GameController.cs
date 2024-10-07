@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,12 +15,18 @@ public class GameController : MonoBehaviour
     
     [Header("Pause Menu")]
     public GameObject pauseMenu;
+
+    public Text scoreTextFinal;
+    public Text welcomeText;
+    public Text unpauseText;
+    public Text resetText;
     
     private float _timeRemaining; // Time remaining for the countdown
     private bool _timerRunning; // Flag to check if the timer is running
     
     private bool _isPaused = false;
-
+    private bool _isGameOver = false;
+    
     private FirstPersonController _fpsController;
     
     void Start()
@@ -30,13 +34,15 @@ public class GameController : MonoBehaviour
         _fpsController = GetComponent<FirstPersonController>();
         
         _timeRemaining = totalTime; // Initialize the time remaining
+        
+        _timerRunning = true; // Start the timer
     }
     
     void Update()
     {
         scoreText.text = "Score: " + score;
 
-        if (_isPaused)
+        if (_isPaused && !_isGameOver)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -44,19 +50,30 @@ public class GameController : MonoBehaviour
             }
         }
         
-        if (Input.GetKeyDown(KeyCode.P))
+        // disable key if the game is over
+        if (!_isGameOver)
         {
-            if (_isPaused)
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                Unpause();
-            }
-            else
-            {
-                PauseGame();
+                if (_isPaused)
+                {
+                    Unpause();
+                }
+                else
+                {
+                    PauseGame();
+                }
             }
         }
-        
-        // if escape go back to main menu
+
+        // if (_isPaused || _isGameOver)
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Escape))
+        //     {
+        //         _fpsController.enabled = false;
+        //         SceneManager.LoadScene(0);
+        //     }
+        // }
         
         if (_timerRunning)
         {
@@ -87,10 +104,15 @@ public class GameController : MonoBehaviour
     private void GameWon()
     {
         _timerRunning = false; // Stop the timer
+        _isGameOver = true;
         
-        Debug.Log("Game Over");
+        welcomeText.text = "Game Over!";
         
-        // display a different panel with the score and some messages to return to menu and stuff
+        scoreTextFinal.gameObject.SetActive(true);
+        scoreTextFinal.text = "Final Score: " + score;
+        
+        unpauseText.gameObject.SetActive(false);
+        resetText.gameObject.SetActive(false);
                 
         StopGameExecution();
     }
@@ -127,6 +149,7 @@ public class GameController : MonoBehaviour
         Unpause();
         
         _timerRunning = true; // Start the timer
+        _isGameOver = false;
         
         pauseMenu.SetActive(false);
     }
