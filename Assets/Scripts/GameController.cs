@@ -17,42 +17,46 @@ public class GameController : MonoBehaviour
     
     [Header("Pause Menu")]
     public GameObject pauseMenu;
-
-    public Text welcomeText;
-    public Text startText;
-
-    public GameObject startGameButton;
     
     private float _timeRemaining; // Time remaining for the countdown
     private bool _timerRunning; // Flag to check if the timer is running
     
     private bool _isPaused = false;
 
-    public void UpdateScore(int valueToAdd)
-    {
-        score += valueToAdd;
-    }
+    private FirstPersonController _fpsController;
     
     void Start()
     {
-        // start the game as paused
-        InitialSetup();
-
-        // _dialogs = new List<GameObject>();
+        _fpsController = GetComponent<FirstPersonController>();
         
-        // StartGame();
-
-        // _timerRunning = true;
+        _timeRemaining = totalTime; // Initialize the time remaining
     }
     
     void Update()
     {
         scoreText.text = "Score: " + score;
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (_isPaused)
         {
-            PauseGame();
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                ResetGame();
+            }
         }
+        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (_isPaused)
+            {
+                Unpause();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+        
+        // if escape go back to main menu
         
         if (_timerRunning)
         {
@@ -80,53 +84,20 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void InitialSetup()
-    {
-        // PauseGame();
-        
-        _timeRemaining = totalTime; // Initialize the time remaining
-
-        welcomeText.text = "Get Ready!";
-        startText.text = "BEGIN!";
-    }
-
     private void GameWon()
     {
         _timerRunning = false; // Stop the timer
         
         Debug.Log("Game Over");
+        
+        // display a different panel with the score and some messages to return to menu and stuff
                 
         StopGameExecution();
-                
-        welcomeText.text = "YOU WON!";
-        startGameButton.SetActive(false);
-    }
-
-    public void StartGame()
-    {
-        Debug.Log("Start Game");
-        
-        Unpause();
-        
-        _timerRunning = true; // Start the timer
-        
-        pauseMenu.SetActive(false);
-    }
-
-    private void GameOver()
-    {
-        StopGameExecution();
-        
-        welcomeText.text = "Game Over!";
-        startGameButton.SetActive(false);
     }
     
     private void PauseGame()
     {
         StopGameExecution();
-        
-        welcomeText.text = "Paused";
-        startText.text = "Continue";
     }
 
     private void StopGameExecution()
@@ -134,6 +105,8 @@ public class GameController : MonoBehaviour
         _isPaused = true;
         
         Time.timeScale = 0f;
+
+        _fpsController.enabled = false;
         
         pauseMenu.SetActive(true);
     }
@@ -143,18 +116,31 @@ public class GameController : MonoBehaviour
         _isPaused = false;
         
         Time.timeScale = 1f;
+        
+        _fpsController.enabled = true;
+        
+        pauseMenu.SetActive(false);
     }
-
-    public bool IsPaused()
+    
+    public void StartGame()
     {
-        return _isPaused;
+        Unpause();
+        
+        _timerRunning = true; // Start the timer
+        
+        pauseMenu.SetActive(false);
     }
-
+    
     public void ResetGame()
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
         
         StartGame();
+    }
+    
+    public void UpdateScore(int valueToAdd)
+    {
+        score += valueToAdd;
     }
 }
